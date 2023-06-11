@@ -3,14 +3,22 @@ import logo from "../../../assets/home/logo.png";
 const NavBar = () => {
   const navOptions = (
     <>
-      <li><Link to="/">Home</Link></li>
-      <li><Link to="/classes">Classes</Link></li>
-      <li><Link to="/instructors">Instructors</Link></li>
-      <li><Link to="/dashboard">Dashboard</Link></li>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/classes">Classes</Link>
+      </li>
+      <li>
+        <Link to="/instructors">Instructors</Link>
+      </li>
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100 max-w-screen-xl mx-auto">
+    <div className="navbar bg-base-100 mx-auto z-20 md:fixed bg-opacity-40 bg-black text-white px-64 py-8">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -31,22 +39,20 @@ const NavBar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black"
           >
             {navOptions}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">
+        <Link to="/">
           <img
             className="w-[220px] border-rose-600 rounded-md hover:bg-none"
             src={logo}
           />
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-            {navOptions}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
@@ -57,7 +63,7 @@ const NavBar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black text-center"
           >
             Arup Debnath
           </ul>
