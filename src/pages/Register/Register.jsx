@@ -1,9 +1,10 @@
-import { FaGoogle } from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Register = () => {
   const {
@@ -23,9 +24,8 @@ const Register = () => {
   
   const onSubmit = (data) => {
     createUser(data.email, data.password)
-        .then((result) => {
-            const loggedInUser = result.user;
-            updateUserProfile(data.name, loggedInUser.photoURL)
+        .then(() => {
+            updateUserProfile(data.name, data.photoUrl)
                 .then(() => {
                     console.log("User Created Successfully!");
                     const saveUser = { name: data.name, email: data.email, role: 'student' }
@@ -101,8 +101,7 @@ const Register = () => {
                   {...register("password", {
                     required: true,
                     minLength: 6,
-                    maxLength: 20,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
                   })}
                 />
                 {errors.password?.type === "required" && (
@@ -111,15 +110,9 @@ const Register = () => {
                 {errors.password?.type === "minLength" && (
                   <p className="text-red-600">Password must be 6 characters</p>
                 )}
-                {errors.password?.type === "maxLength" && (
-                  <p className="text-red-600">
-                    Password must be less than 20 characters
-                  </p>
-                )}
                 {errors.password?.type === "pattern" && (
                   <p className="text-red-600">
-                    Password must have one uppercase, one lower case, one number
-                    and one special character.
+                    Password must have a capital letter and a special character.
                   </p>
                 )}
               </div>
@@ -175,9 +168,7 @@ const Register = () => {
               </div>
               <div className="text-center text-1xl mt-5">
                 <h1>Or, Sign Up with</h1>
-                <button className="text-2xl mt-3">
-                  <FaGoogle />
-                </button>
+                <SocialLogin></SocialLogin>
               </div>
             </form>
           </div>
