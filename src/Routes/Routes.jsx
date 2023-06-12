@@ -15,6 +15,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       // Student routes
       {
