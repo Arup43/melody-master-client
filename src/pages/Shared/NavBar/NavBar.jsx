@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
 
   const handleLogOut = () => {
     logOut()
@@ -30,7 +29,7 @@ const NavBar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 mx-auto z-20 md:fixed bg-opacity-40 bg-black text-white px-64 py-8">
+    <div className="navbar mx-auto z-20 md:fixed bg-opacity-40 bg-black text-white px-64 py-8">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
