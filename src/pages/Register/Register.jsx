@@ -1,14 +1,67 @@
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useContext, useRef } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset
+  } = useForm();
+
+  const password = useRef({});
+  password.current = watch("password", "");
+
+  const navigate = useNavigate();
+  
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  
+  const onSubmit = (data) => {
+    createUser(data.email, data.password)
+        .then((result) => {
+            const loggedInUser = result.user;
+            updateUserProfile(data.name, loggedInUser.photoURL)
+                .then(() => {
+                    console.log("User Created Successfully!");
+                    const saveUser = { name: data.name, email: data.email, role: 'student' }
+                    fetch("http://localhost:5000/users", {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(saveUser)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            reset();
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'User created successfully.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate('/');
+                        }
+                    })
+                })
+        })
+  };
+
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200 pt-32">
         <div className="hero-content w-full">
           <div className="card w-full max-w-lg shadow-2xl bg-base-100">
             <h1 className="text-2xl text-center mt-7">Please Register!</h1>
-            <div className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -17,7 +70,11 @@ const Register = () => {
                   type="text"
                   placeholder="name"
                   className="input input-bordered"
+                  {...register("name", { required: true })}
                 />
+                {errors.name && (
+                  <span className="text-red-600">Name is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -27,7 +84,11 @@ const Register = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
+                  {...register("email", { required: true })}
                 />
+                {errors.email && (
+                  <span className="text-red-600">Email is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -37,7 +98,30 @@ const Register = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  })}
                 />
+                {errors.password?.type === "required" && (
+                  <p className="text-red-600">Password is required</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-600">Password must be 6 characters</p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-600">
+                    Password must be less than 20 characters
+                  </p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-600">
+                    Password must have one uppercase, one lower case, one number
+                    and one special character.
+                  </p>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -47,7 +131,20 @@ const Register = () => {
                   type="password"
                   placeholder="confirm password"
                   className="input input-bordered"
+                  {...register("confirmPassword", {
+                    required: true,
+                    validate: (value) =>
+                      value === password.current || "Passwords do not match",
+                  })}
                 />
+                {errors.confirmPassword?.type == "required" && (
+                  <span className="text-red-600">This field is required</span>
+                )}
+                {errors.confirmPassword?.type == "validate" && (
+                  <span className="text-red-600">
+                    {errors.confirmPassword.message}
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -57,7 +154,11 @@ const Register = () => {
                   type="text"
                   placeholder="photo url"
                   className="input input-bordered"
+                  {...register("photoUrl", { required: true })}
                 />
+                {errors.photoUrl && (
+                  <span className="text-red-600">Photo URL is required</span>
+                )}
               </div>
               <label>
                 <small className="mr-1">Already have an account?</small>
@@ -66,13 +167,19 @@ const Register = () => {
                 </Link>
               </label>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <input
+                  className="btn btn-primary"
+                  type="submit"
+                  value="Register"
+                />
               </div>
               <div className="text-center text-1xl mt-5">
                 <h1>Or, Sign Up with</h1>
-                <button className="text-2xl mt-3"><FaGoogle /></button>
+                <button className="text-2xl mt-3">
+                  <FaGoogle />
+                </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
