@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Home from "../pages/Home/Home/Home";
-import Classes from "../pages/Classes/Classes";
-import Instructors from "../pages/Instructors/Instructors";
+import Classes from "../pages/Classes/Classes/Classes";
+import Instructors from "../pages/Instructors/Instructors/Instructors";
 import Dashboard from "../Layouts/Dashboard";
 import SelectedClasses from "../pages/Dashboard/SelectedClasses/SelectedClasses";
 import EnrolledClasses from "../pages/Dashboard/EnrolledClasses/EnrolledClasses";

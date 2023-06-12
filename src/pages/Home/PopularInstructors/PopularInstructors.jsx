@@ -1,6 +1,6 @@
 const PopularInstructors = () => {
   return (
-    <div className="max-w-screen-xl mx-auto text-center mt-20">
+    <div className="max-w-screen-xl mx-auto text-center mt-20 mb-20">
       <h1 className=" text-5xl">Popular Instructors</h1>
       <p className="mt-5">Explore our most popular instructors!</p>
       <div className="grid md:grid-cols-3 mt-14 gap-6">
