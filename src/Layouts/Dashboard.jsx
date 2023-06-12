@@ -10,11 +10,14 @@ import {
   FaShoppingCart,
   FaViruses,
 } from "react-icons/fa";
+import useStudent from "../hooks/useStudent";
+import useInstructor from "../hooks/useInstructor";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-  const isStudent = true;
-  const isInstructor = false;
-  const isAdmin = false;
+  const [isStudent] = useStudent();
+  const [isInstructor] = useInstructor();
+  const [isAdmin] = useAdmin();
 
   return (
     <div>

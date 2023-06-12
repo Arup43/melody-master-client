@@ -14,6 +14,7 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import NotFound from "../pages/NotFound/NotFound";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: "enrolled-classes",
         element: <EnrolledClasses></EnrolledClasses>
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>
       },
       {
         path: "payment-history",
