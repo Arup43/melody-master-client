@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
         element: <StudentRoute><EnrolledClasses></EnrolledClasses></StudentRoute>
       },
       {
-        path: "payment",
+        path: "payment/:id",
         element: <StudentRoute><Payment></Payment></StudentRoute>
       },
       {

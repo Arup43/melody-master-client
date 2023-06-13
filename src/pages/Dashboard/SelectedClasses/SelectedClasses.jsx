@@ -2,6 +2,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import useSelectedClasses from "../../../hooks/useSelectedClasses";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
   const [selectedClasses, refetch] = useSelectedClasses();
@@ -78,11 +79,15 @@ const SelectedClasses = () => {
                       <FaTrashAlt></FaTrashAlt>
                     </button>
                   </td>
-                  <td>
-                    <button className="btn btn-primary btn-sm btn-outline">
-                      Pay
-                    </button>
-                  </td>
+                  {c.availableSeats > 0 && (
+                    <td>
+                      <Link to={`/dashboard/payment/${c._id}`}>
+                        <button className="btn btn-primary btn-sm btn-outline">
+                          Pay
+                        </button>
+                      </Link>
+                    </td>
+                  )}
                 </tr>
               );
             })}
