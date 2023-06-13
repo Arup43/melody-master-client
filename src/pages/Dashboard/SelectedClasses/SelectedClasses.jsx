@@ -1,9 +1,33 @@
 import { FaTrashAlt } from "react-icons/fa";
 import useSelectedClasses from "../../../hooks/useSelectedClasses";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const SelectedClasses = () => {
   const [selectedClasses, refetch] = useSelectedClasses();
+  const [axiosSecure] = useAxiosSecure();
   console.log("selectedClasses", selectedClasses);
+
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/selected-classes/${id}`);
+        if (res.data.deletedCount === 1) {
+          refetch();
+          Swal.fire("Deleted!", "Your Class has been deleted.", "success");
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <h1 className="text-center text-4xl font-bold mb-10">
@@ -47,12 +71,17 @@ const SelectedClasses = () => {
                   </td>
                   <td>{c.price}</td>
                   <td>
-                    <button className="btn btn-circle btn-sm btn-outline text-red-600">
+                    <button
+                      onClick={() => handleDelete(c._id)}
+                      className="btn btn-circle btn-sm btn-outline text-red-600"
+                    >
                       <FaTrashAlt></FaTrashAlt>
                     </button>
                   </td>
                   <td>
-                    <button className="btn btn-primary btn-sm btn-outline">Pay</button>
+                    <button className="btn btn-primary btn-sm btn-outline">
+                      Pay
+                    </button>
                   </td>
                 </tr>
               );
