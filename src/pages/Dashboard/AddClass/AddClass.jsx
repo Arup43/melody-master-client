@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
@@ -15,25 +14,32 @@ const AddClass = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const saveClass = {...data, status: 'pending'};
-    const res = await axiosSecure.post('/classes', saveClass);
+    const saveClass = {
+      ...data,
+      availableSeats: parseInt(data.availableSeats),
+      price: parseFloat(data.price),
+      status: "pending",
+      totalEnrolled: 0,
+      feedBack: "",
+    };
+    const res = await axiosSecure.post("/classes", saveClass);
     if (res.data.insertedId) {
-        reset();
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Class added successfully.",
-            showConfirmButton: false,
-            timer: 1500,
-        });
+      reset();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Class added successfully.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } else {
-        Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "Something went wrong!",
-            showConfirmButton: false,
-            timer: 1500,
-        });
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Something went wrong!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
