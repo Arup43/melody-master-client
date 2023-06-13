@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext, useRef } from "react";
@@ -12,48 +11,50 @@ const Register = () => {
     handleSubmit,
     watch,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
   const password = useRef({});
   password.current = watch("password", "");
 
   const navigate = useNavigate();
-  
-  const { createUser, updateUserProfile } = useContext(AuthContext);
-  
-  const onSubmit = (data) => {
-    createUser(data.email, data.password)
-        .then(() => {
-            updateUserProfile(data.name, data.photoUrl)
-                .then(() => {
-                    console.log("User Created Successfully!");
-                    const saveUser = { name: data.name, email: data.email, role: 'student' }
-                    fetch("http://localhost:5000/users", {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify(saveUser)
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.insertedId) {
-                            reset();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'User created successfully.',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            navigate('/');
-                        }
-                    })
-                })
-        })
-  };
 
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+
+  const onSubmit = (data) => {
+    createUser(data.email, data.password).then(() => {
+      updateUserProfile(data.name, data.photoUrl).then(() => {
+        console.log("User Created Successfully!");
+        const saveUser = {
+          name: data.name,
+          email: data.email,
+          role: "student",
+          photoUrl: data.photoUrl
+        };
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User created successfully.",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
+      });
+    });
+  };
 
   return (
     <div>
