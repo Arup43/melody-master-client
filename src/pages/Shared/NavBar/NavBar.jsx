@@ -26,9 +26,9 @@ const NavBar = () => {
       <li>
         <Link to="/instructors">Instructors</Link>
       </li>
-      <li>
+      {user && <li>
         <Link to="/dashboard">Dashboard</Link>
-      </li>
+      </li>}
     </>
   );
   return (
