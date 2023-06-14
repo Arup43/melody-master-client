@@ -19,6 +19,7 @@ import PrivateRoute from "./PrivateRoute";
 import StudentRoute from "./StudentRoute";
 import InstructorRoute from "./InstructorRoute";
 import AdminRoute from "./AdminRoute";
+import Feedback from "../pages/Dashboard/ManageClasses/Feedback";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "manage-users",
         element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+      },
+      {
+        path: "feedback/:id",
+        element: <AdminRoute><Feedback></Feedback></AdminRoute>
       }
     ]
   },

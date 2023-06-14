@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAllClasses from "../../../hooks/useAllClasses";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageClasses = () => {
   const [allClasses, refetch] = useAllClasses();
@@ -8,18 +9,18 @@ const ManageClasses = () => {
 
   const handleApproveOrDeny = async (id, updatedStatus) => {
     const res = await axiosSecure.patch(`/all-classes/${id}`, {
-        status: updatedStatus,
+      status: updatedStatus,
     });
-    console.log('res from axios', res);
+    console.log("res from axios", res);
     if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: `Class Status updated successfully!`,
-            showConfirmButton: false,
-            timer: 1500
-          })
+      refetch();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `Class Status updated successfully!`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -28,6 +29,7 @@ const ManageClasses = () => {
       <h1 className="text-center text-4xl font-bold mb-10">
         My Selected Classes
       </h1>
+
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -71,19 +73,29 @@ const ManageClasses = () => {
                   <td>{c.price}</td>
                   <td>{c.status}</td>
                   <td>
-                    <button onClick={() => handleApproveOrDeny(c._id, 'approved')} disabled={c.status !== 'pending'} className="btn btn-outline btn-success btn-sm">
+                    <button
+                      onClick={() => handleApproveOrDeny(c._id, "approved")}
+                      disabled={c.status !== "pending"}
+                      className="btn btn-outline btn-success btn-sm"
+                    >
                       Approve
                     </button>
                   </td>
                   <td>
-                    <button onClick={() => handleApproveOrDeny(c._id, 'denied')} disabled={c.status !== 'pending'} className="btn btn-outline btn-error btn-sm">
+                    <button
+                      onClick={() => handleApproveOrDeny(c._id, "denied")}
+                      disabled={c.status !== "pending"}
+                      className="btn btn-outline btn-error btn-sm"
+                    >
                       Deny
                     </button>
                   </td>
                   <td>
-                    <button className="btn btn-outline btn-primary btn-sm">
-                      Feedback
-                    </button>
+                    <Link to={`/dashboard/feedback/${c._id}`}>
+                      <button className="btn btn-outline btn-primary btn-sm">
+                        Feedback
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               );
