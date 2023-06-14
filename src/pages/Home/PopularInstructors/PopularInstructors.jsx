@@ -23,7 +23,7 @@ const PopularInstructors = () => {
                 <img src={instructor.photoUrl} alt={instructor.name} className="h-[300px]" />
               </figure>
               <div className="card-body text-left bg-purple-200 bg-opacity-30 rounded-lg">
-                <h2 className="card-title text-slate-600 font-semibold">{instructor.name}</h2>
+                <h2 className="card-title font-semibold">{instructor.name}</h2>
                 <p><span className="font-bold text-fuchsia-600">Email</span>: {instructor.email}</p>
               </div>
             </div>
