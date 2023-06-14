@@ -1,99 +1,38 @@
+import { useEffect, useState } from "react";
+
 const PopularClasses = () => {
+  const [classes, setClasses] = useState([]);
+  useEffect(() => {
+    const fetchClasses = async () => {
+      const res = await fetch("http://localhost:5000/popular-classes");
+      const data = await res.json();
+      setClasses(data);
+    };
+    fetchClasses();
+  }, []);
+
+  console.log(classes);
+
   return (
     <div className="max-w-screen-xl mx-auto text-center">
       <h1 className=" text-5xl">Popular Classes</h1>
       <p className="mt-5">Explore our most popular classes!</p>
       <div className="grid md:grid-cols-3 mt-14 gap-6">
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://cdn.ceoworld.biz/wp-content/uploads/2022/07/The-Most-Expensive-Music-Instruments-Used-So-Far.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
+        {classes?.map((c) => {
+          return (
+            <div key={c._id} className="card card-compact w-96 bg-base-100 shadow-xl">
+              <figure>
+                <img src={c.imgURL} alt={c.className} className="h-[300px]" />
+              </figure>
+              <div className="card-body text-left">
+                <h2 className="card-title text-slate-600 font-semibold">{c.className}</h2>
+                <p><span className="font-bold text-fuchsia-600">Price</span>: {c.price}</p>
+                <p><span className="font-bold text-fuchsia-600">Available Seats</span>: {c.availableSeats}</p>
+                <p><span className="font-bold text-fuchsia-600">Instructor</span>: {c.instructorName}</p>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://cdn.ceoworld.biz/wp-content/uploads/2022/07/The-Most-Expensive-Music-Instruments-Used-So-Far.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://cdn.ceoworld.biz/wp-content/uploads/2022/07/The-Most-Expensive-Music-Instruments-Used-So-Far.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://cdn.ceoworld.biz/wp-content/uploads/2022/07/The-Most-Expensive-Music-Instruments-Used-So-Far.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://cdn.ceoworld.biz/wp-content/uploads/2022/07/The-Most-Expensive-Music-Instruments-Used-So-Far.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure>
-            <img
-              src="https://cdn.ceoworld.biz/wp-content/uploads/2022/07/The-Most-Expensive-Music-Instruments-Used-So-Far.jpg"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );
