@@ -1,0 +1,36 @@
+.review {
+    width: 50%;
+    margin: auto;
+}
+
+.review img{
+    width: 150px;
+}
+
+.img-container{
+    width: 120px;
+    height: 120px;
+    overflow:hidden;
+    border-radius: 50%;
+    border: 4px solid #ff7afd;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.img-container img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+/* media query for mobile devices */
+@media only screen and (max-width: 768px) {
+    .review {
+        width: 100%;
+        margin-bottom: 70px;
+    }
+    .reviews {
+        flex-direction: column;
+        text-align: center;
+    }
+}
