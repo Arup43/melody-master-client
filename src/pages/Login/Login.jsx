@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin/SocialLogin";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const {
@@ -12,6 +13,8 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm();
+
+  const [hide, setHide] = useState(true);
 
   const navigate = useNavigate();
 
@@ -37,6 +40,10 @@ const Login = () => {
     });
   };
 
+  const toggleHide = () => {
+    setHide(!hide);
+  }
+
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -58,18 +65,23 @@ const Login = () => {
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={`${hide? "password" : "text"}`}
                   placeholder="password"
                   className="input input-bordered"
                   {...register("password", {
                     required: true,
                   })}
                 />
+                <span className="absolute top-2/3 right-3 transform -translate-y-1/2 cursor-pointer">
+                  {
+                    hide? <FaEye onClick={toggleHide}></FaEye> : <FaEyeSlash onClick={toggleHide}></FaEyeSlash>
+                  }
+                </span>
                 {errors.password?.type === "required" && (
                   <p className="text-red-600">Password is required</p>
                 )}
