@@ -26,71 +26,83 @@ const NavBar = () => {
       <li>
         <Link to="/instructors">Instructors</Link>
       </li>
-      {user && <li>
-        <Link to="/dashboard">Dashboard</Link>
-      </li>}
+      {user && (
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      )}
     </>
   );
   return (
-    <div className="navbar mx-auto z-20 md:fixed bg-opacity-40 bg-black text-white px-64 py-8">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black"
-          >
-            {navOptions}
-          </ul>
-        </div>
-        <Link to="/">
-          <img
-            className="w-[220px] border-rose-600 rounded-md hover:bg-none"
-            src={logo}
-          />
-        </Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
-      </div>
-      <div className="navbar-end">
-        {user ? (
-          <>
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-14 rounded-full">
-                  <img src={user?.photoURL} />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-48 text-black text-center dark:text-white"
+    <>
+      <img
+        className="md:w-full border-rose-600 rounded-md hover:bg-none min-[600px]:hidden"
+        src={logo}
+      />
+      <div className="navbar mx-auto z-20 md:fixed bg-opacity-40 bg-black text-white px-64 py-8">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                {user?.displayName}
-              </ul>
-            </div>
-            <button onClick={handleLogOut} className="btn ml-5">Logout</button>
-          </>
-        ) : (
-          <Link to="/login"><button className="btn ml-5">Login</button></Link>
-        )}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-black"
+            >
+              {navOptions}
+            </ul>
+          </div>
+          <Link to="/">
+            <img
+              className="md:w-[220px] border-rose-600 rounded-md hover:bg-none"
+              src={logo}
+            />
+          </Link>
+        </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+        </div>
+        <div className="navbar-end">
+          {user ? (
+            <>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-14 rounded-full">
+                    <img src={user?.photoURL} />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-48 text-black text-center"
+                >
+                  {user?.displayName}
+                </ul>
+              </div>
+              <button onClick={handleLogOut} className="btn ml-5">
+                Logout
+              </button>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="btn ml-5">Login</button>
+            </Link>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
