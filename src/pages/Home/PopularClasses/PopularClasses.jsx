@@ -24,7 +24,7 @@ const PopularClasses = () => {
               <figure>
                 <img src={c.imgURL} alt={c.className} className="h-[300px]" />
               </figure>
-              <div className="card-body text-left">
+              <div className="card-body text-left bg-blue-200 bg-opacity-30">
                 <h2 className="card-title text-slate-600 font-semibold">{c.className}</h2>
                 <p><span className="font-bold text-fuchsia-600">Price</span>: {c.price}</p>
                 <p><span className="font-bold text-fuchsia-600">Available Seats</span>: {c.availableSeats}</p>

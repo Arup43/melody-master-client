@@ -53,7 +53,7 @@ const Class = ({ id, image, name, instructor, availableSeats, price }) => {
 
   return (
     <div
-      className={`shadow-lg border-0 rounded-lg ${
+      className={`shadow-lg border-0 bg-blue-200 bg-opacity-30 rounded-lg ${
         availableSeats === 0 && "bg-red-500 bg-opacity-60"
       }`}
     >
