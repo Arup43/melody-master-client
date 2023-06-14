@@ -7,6 +7,7 @@ import img3 from "../../../assets/home/slider/slider3.jpg";
 import img4 from "../../../assets/home/slider/slider4.jpg";
 import img5 from "../../../assets/home/slider/slider5.jpg";
 import img6 from "../../../assets/home/slider/slider6.jpg";
+import { Bounce } from "react-awesome-reveal";
 
 const Slider = () => {
   return (
@@ -14,9 +15,11 @@ const Slider = () => {
       <div>
         <img src={img1} />
         <div className="legend p-10">
-          <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
-            Melody Master
-          </h1>
+          <Bounce>
+            <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
+              Melody Master
+            </h1>
+          </Bounce>
           <p className="mt-3 max-[600px]:mt-0">Brings music to life!</p>
           <p className="text-[0.9rem] mt-10 w-2/6 mx-auto max-[600px]:hidden">
             Want to learn{" "}
@@ -32,9 +35,11 @@ const Slider = () => {
       <div>
         <img src={img2} />
         <div className="legend p-10">
-          <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
-            Melody Master
-          </h1>
+          <Bounce>
+            <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
+              Melody Master
+            </h1>
+          </Bounce>
           <p className="mt-3 max-[600px]:mt-0">Brings music to life!</p>
           <p className="text-[0.9rem] mt-10 w-2/6 mx-auto max-[600px]:hidden">
             Want to learn{" "}
@@ -50,9 +55,11 @@ const Slider = () => {
       <div>
         <img src={img3} />
         <div className="legend p-10">
-          <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
-            Melody Master
-          </h1>
+          <Bounce>
+            <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
+              Melody Master
+            </h1>
+          </Bounce>
           <p className="mt-3 max-[600px]:mt-0">Brings music to life!</p>
           <p className="text-[0.9rem] mt-10 w-2/6 mx-auto max-[600px]:hidden">
             Want to learn{" "}
@@ -68,9 +75,11 @@ const Slider = () => {
       <div>
         <img src={img4} />
         <div className="legend p-10">
-          <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
-            Melody Master
-          </h1>
+          <Bounce>
+            <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
+              Melody Master
+            </h1>
+          </Bounce>
           <p className="mt-3 max-[600px]:mt-0">Brings music to life!</p>
           <p className="text-[0.9rem] mt-10 w-2/6 mx-auto max-[600px]:hidden">
             Want to learn{" "}
@@ -86,9 +95,11 @@ const Slider = () => {
       <div>
         <img src={img5} />
         <div className="legend p-10">
-          <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
-            Melody Master
-          </h1>
+          <Bounce>
+            <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
+              Melody Master
+            </h1>
+          </Bounce>
           <p className="mt-3 max-[600px]:mt-0">Brings music to life!</p>
           <p className="text-[0.9rem] mt-10 w-2/6 mx-auto max-[600px]:hidden">
             Want to learn{" "}
@@ -104,9 +115,11 @@ const Slider = () => {
       <div>
         <img src={img6} />
         <div className="legend p-10">
-          <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
-            Melody Master
-          </h1>
+          <Bounce>
+            <h1 className="text-6xl text-purple-300 max-[600px]:text-lg">
+              Melody Master
+            </h1>
+          </Bounce>
           <p className="mt-3 max-[600px]:mt-0">Brings music to life!</p>
           <p className="text-[0.9rem] mt-10 w-2/6 mx-auto max-[600px]:hidden">
             Want to learn{" "}
