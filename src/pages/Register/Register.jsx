@@ -29,9 +29,9 @@ const Register = () => {
           name: data.name,
           email: data.email,
           role: "student",
-          photoUrl: data.photoUrl
+          photoUrl: data.photoUrl,
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://melody-master-server-drab.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

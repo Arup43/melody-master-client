@@ -5,7 +5,9 @@ const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
   useEffect(() => {
     const fetchClasses = async () => {
-      const res = await fetch("http://localhost:5000/popular-classes");
+      const res = await fetch(
+        "https://melody-master-server-drab.vercel.app/popular-classes"
+      );
       const data = await res.json();
       setClasses(data);
     };
@@ -22,9 +24,7 @@ const PopularClasses = () => {
         {classes?.map((c) => {
           return (
             <Fade key={c._id} cascade dump={0.5}>
-              <div
-                className="card card-compact w-96 bg-base-100 shadow-xl sm:w-11/12 mx-auto mb-10"
-              >
+              <div className="card card-compact w-96 bg-base-100 shadow-xl sm:w-11/12 mx-auto mb-10">
                 <figure>
                   <img src={c.imgURL} alt={c.className} className="h-[300px]" />
                 </figure>

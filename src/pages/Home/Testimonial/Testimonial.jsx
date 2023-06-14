@@ -5,7 +5,7 @@ import { Roll } from "react-awesome-reveal";
 const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch("https://melody-master-server-drab.vercel.app/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
@@ -19,14 +19,9 @@ const Testimonial = () => {
           return (
             <div className="review" key={r._id}>
               <div className="img-container">
-                <img
-                  src={r.photoUrl}
-                  alt={r.name}
-                />
+                <img src={r.photoUrl} alt={r.name} />
               </div>
-              <p>
-                “{r.review}”
-              </p>
+              <p>“{r.review}”</p>
               <h3 className="text-xl font-semibold mb-10">{r.name}</h3>
             </div>
           );

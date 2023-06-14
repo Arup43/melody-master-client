@@ -5,7 +5,9 @@ const PopularInstructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
     const fetchClasses = async () => {
-      const res = await fetch("http://localhost:5000/instructors?limit=6");
+      const res = await fetch(
+        "https://melody-master-server-drab.vercel.app/instructors?limit=6"
+      );
       const data = await res.json();
       setInstructors(data);
     };

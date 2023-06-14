@@ -4,7 +4,7 @@ import Instructor from "../Instructor/Instructor";
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/instructors")
+    fetch("https://melody-master-server-drab.vercel.app/instructors")
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   }, []);
@@ -15,14 +15,14 @@ const Instructors = () => {
         Choose with whom you want to learn your dream instrument.
       </p>
       <div className="grid md:grid-cols-3 gap-10">
-        {
-          instructors.map(instructor => <Instructor
+        {instructors.map((instructor) => (
+          <Instructor
             key={instructor._id}
             image={instructor.photoUrl}
             name={instructor.name}
             email={instructor.email}
-          ></Instructor>)
-        }
+          ></Instructor>
+        ))}
       </div>
     </div>
   );
